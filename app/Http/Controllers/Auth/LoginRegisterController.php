@@ -43,6 +43,13 @@ class LoginRegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        $user = User::create([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+        ]);
 
         return redirect()->route('login');
     }
