@@ -1,0 +1,76 @@
+input {
+  border: 2.36364px solid #c0c0c0 !important;
+  border-radius: 0px !important;
+  height: 45px !important;
+  box-sizing: border-box;
+}
+
+.card {
+  border: 1.36364px solid #8A8A8A !important;
+  border-radius: 0px !important;
+}
+
+#login-register-card {
+  width: 500px !important;
+  height: 500px !important;
+}
+
+#card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0px 70px;
+  align-items: center;
+  margin-top: -15px;
+  margin-bottom: -15px;
+}
+
+#button-login-register {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px 24px;
+  gap: 8px;
+  border-radius: 0px !important;
+}
+
+#login-register-button-text {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#login-register-font{
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 13px;
+  margin-top: 3px;
+}
+
+
+#login-register-logo {
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+
+#fomr-input-container{
+  margin-bottom: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+#login-register-container {
+  height: 100%;
+  background: #202020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#back-logo-container {
+  position: absolute;
+  bottom: -80px;
+  left: 10px;
+  width: 48%;
+}

@@ -1,0 +1,104 @@
+input {
+  border: 0.15em solid #c0c0c0;
+  border-radius: 0px !important;
+  height: 2.8125em;
+  box-sizing: border-box;
+}
+
+.card {
+  border: 0.082em solid #8A8A8A;
+  border-radius: 0;
+}
+
+#login-register-card {
+  width: 31.25em;
+  height: 31.25em;
+}
+
+#card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0 4.375em;
+  align-items: center;
+  margin-top: -0.9375em;
+  margin-bottom: -0.9375em;
+}
+
+#button-login-register {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.75em 1.5em;
+  gap: 0.5em;
+  border-radius: 0;
+}
+
+#login-register-button-text {
+  color: white;
+  font-size: 1em;
+  font-weight: 500;
+}
+
+#login-register-font{
+  font-size: 0.875em;
+  font-weight: 400;
+  margin-bottom: 0.8125em;
+  margin-top: 0.1875em;
+}
+
+
+#login-register-logo {
+  margin-top: 1.25em;
+  margin-bottom: -1.25em;
+}
+
+#fomr-input-container{
+  margin-bottom: 1.5625em;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+}
+
+#login-register-container {
+  height: 100%;
+  background: #202020;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#back-logo-container {
+  position: absolute;
+  bottom: -5em;
+  left: 1.25em;
+  width: 48%;
+}
+
+/* Media queries para ajustar el diseño en diferentes tamaños de pantalla */
+
+@media only screen and (max-width: 768px) {
+  #login-register-card {
+    width: 90%;
+    height: auto;
+  }
+
+  #card-content {
+    padding: 0 1.875em;
+  }
+
+  #button-login-register {
+    padding: 0.5em 1em;
+  }
+
+  #back-logo-container {
+    bottom: -3.125em;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  #fomr-input-container{
+    padding-left: 0.9375em;
+    padding-right: 0.9375em;
+  }
+}

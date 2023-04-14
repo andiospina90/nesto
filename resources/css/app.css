@@ -1,0 +1,6 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+input {
+    border: 1.36364px solid #8A8A8A !important;
+    border-radius: 0px !important;
+  }
