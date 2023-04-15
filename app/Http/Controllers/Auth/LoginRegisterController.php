@@ -38,18 +38,55 @@ class LoginRegisterController extends Controller
     {
         
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'nombre' => 'required',
+            'email' => 'required',
+            'telefono' => 'required',
+            'apellidos' => 'required',
+            'password' => 'required',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'last_name' => $request->last_name,
+        User::create([
+            'name' => $request->nombre,
+            'last_name' => $request->apellidos,
             'email' => $request->email,
-            'phone' => $request->phone,
+            'phone' => $request->telefono,
             'password' => Hash::make($request->password),
         ]);
+
+        return redirect()->route('login');
+    }
+
+    public function authenticate(Request $request)
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (auth()->attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->route('dashboard');
+        }
+
+        return back()->withErrors([
+            'email' => 'Datos de inicio de sesión incorrectos.',
+        ]);
+    }
+
+    public function dashboard()
+    {
+        $user = auth()->user();
+        return view('dashboard', compact('user'));
+    }
+
+    public function logout(Request $request)
+    {
+        auth()->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         return redirect()->route('login');
     }

@@ -7,7 +7,7 @@
         </div>
         <div class="row  " style="heigth:78% !important">
             <div class="col-md-6">
-                <div class="card" id="login-register-card" style="height: 43.25em !important">
+                <div class="card" id="login-register-card" style="height: 37.25em !important">
                     <div class="card-body">
                         <div id="card-content">
                             <div class="" id="login-register-logo">
@@ -65,8 +65,11 @@
                                 <div class="mb-3 mt-3 d-flex justify-content-center" style="padding-top: 20px;">
                                     <button type="submit" class="btn" id="button-login-register">
                                         <span id="login-register-button-text">Registrarse</span></button>
+                                    <a href="{{ route('login') }}" class="btn" id="button-login-register" style="margin-left:10px;">
+                                        <span id="login-register-button-text">Regresar</span>
+                                    </a>
                                 </div>
- 
+
                             </form>
                         </div>
                     </div>
