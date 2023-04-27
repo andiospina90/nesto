@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\BaseController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     if (auth()->check()) {
-        return redirect()->route('dashboard');
+        return redirect()->route('main');
     }
     return redirect()->route('login');
 });
@@ -26,7 +29,7 @@ Route::controller(LoginRegisterController::class)->group(function () {
     Route::post('/store', 'store')->name('store');
     Route::get('/login', 'login')->name('login');
     Route::post('/authenticate', 'authenticate')->name('authenticate');
-    Route::get('/dashboard', 'dashboard')->name('dashboard');
+    Route::get('/main', 'main')->name('main');
     Route::post('/logout', 'logout')->name('logout');
 });
 
@@ -41,6 +44,11 @@ Route::post('/logout', [LoginRegisterController::class,'logout'])->name('logout'
 
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', [LoginRegisterController::class, 'dashboard'])->name('dashboard');
+    Route::get('/main', [LoginRegisterController::class, 'main'])->name('main');
     Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
+
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/usuarios',[UserController::class,'index']);
+    Route::get('/usuario/registrar',[UserController::class,'create']);
+
 });

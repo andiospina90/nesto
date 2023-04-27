@@ -15,7 +15,7 @@ class LoginRegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except([
-            'logout', 'dashboard'
+            'logout', 'main'
         ]);
     }
 
@@ -66,7 +66,7 @@ class LoginRegisterController extends Controller
         if (auth()->attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->route('dashboard');
+            return redirect()->route('main');
         }
 
         return back()->withErrors([
@@ -74,10 +74,10 @@ class LoginRegisterController extends Controller
         ]);
     }
 
-    public function dashboard()
+    public function main()
     {
         $user = auth()->user();
-        return view('dashboard', compact('user'));
+        return view('main', compact('user'));
     }
 
     public function logout(Request $request)
@@ -89,5 +89,10 @@ class LoginRegisterController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
+    }
+
+    public function dashboard()
+    {
+        return view('dashboard');
     }
 }
