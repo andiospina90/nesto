@@ -29,45 +29,73 @@
 </head>
 
 <body>
-    <div class="sidebar">
-        <div class="logo">
-            <img src="{{ asset('img/Nesto blanco.svg') }}" alt="logo" width="200">
-            <div class="logo-text-container"><span class="logo-text">N</span></div>
-        </div>
+    @if (Auth::check())
+        <div class="sidebar">
+            <div style="padding-top: 5%; padding-left: 12%;">
+                <div class="logo">
+                    <img src="{{ asset('img/NestoWhite.svg') }}" alt="logo" width="100">
+                    <div class="logo-text-container"><span class="logo-text">N</span></div>
+                </div>
 
-        <ul class="nav-list">
-            <li>
-                <a href="{{ url('/dashboard') }}">
-                    <i class="fab fa-microsoft"></i>
-                    <span class="link-name">Dashboard</span>
-                </a>
-            </li>
+                <div style="font-size:20px; padding-top: 18%;">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span style="color:white">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
+                </div>
+            </div>
+            <ul class="nav-list">
+                <li>
+                    <a href="{{ url('/dashboard') }}">
+                        <i class="fab fa-microsoft"></i>
+                        <span class="link-name">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <div class="icon-link">
+                        <a href="#">
+                           <i class="fa-solid fa-user"></i>
+                            <span class="link-name">Usuarios</span>
+                        </a>
+                        <i class="fas fa-caret-down arrow"></i>
+                    </div>
+
+                    <ul class="sub-menu">
+                        <li><a href="{{ url('/usuarios') }}">Consultar Usuarios</a></li>
+                        <li><a href="{{ url('/usuario/registrar') }}">Registrar usuarios</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="icon-link">
+                        <a href="#">
+                            <i class="fa-solid fa-building"></i>
+                            <span class="link-name">Empresa</span>
+                        </a>
+                        <i class="fas fa-caret-down arrow"></i>
+                    </div>
+
+                    <ul class="sub-menu">
+                        <li><a href="{{ url('/empresas') }}">Consultar Empresas</a></li>
+                        <li><a href="{{ url('/empresa/registrar') }}">Registrar Empresa</a></li>
+                    </ul>
+                </li>
                     <li>
-          <div class="icon-link">
-            <a href="#">
-              <i class="fas fa-laptop-code"></i>
-              <span class="link-name">Usuarios</span>
-            </a>
-            <i class="fas fa-caret-down arrow"></i>
-          </div>
-
-          <ul class="sub-menu">
-            <li><a href="{{url('/usuarios')}}">Consultar Usuarios</a></li>
-            <li><a href="{{url('/usuario/registrar')}}">Registrar usuarios</a></li>
-          </ul>
-        </li>
-
-        </ul>
-    </div>
+                    <a href="#">
+                       <i class="fa-solid fa-chalkboard"></i>
+                        <span class="link-name">Proyectos</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <div class="home-section">
-        <div class="home-content">
-            <i class="fas fa-bars"></i>
+            <div class="home-content">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="content-container">
+                @yield('content')
+            </div>
         </div>
-        <div>
-            @yield('content')
-        </div>
-    </div>
-    
+    @else
+        @yield('contentLogin')
+    @endif
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/nesto.js') }}" defer></script>
 </body>

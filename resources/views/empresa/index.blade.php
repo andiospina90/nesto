@@ -3,7 +3,7 @@
 
 @section('content')
     <div class="">
-        <h1 class="titulos">Consultar Colaboradores</h1>
+        <h1 class="titulos">Consultar Empresas</h1>
 
         <div>
 
@@ -15,11 +15,11 @@
             @endif
         </div>
         <div style="margin-top:4rem;margin-bottom:4rem"> 
-            <a href="{{ url('usuario/registrar') }}" id="button-login-register" class="btn" style="width:15%;color:white">
-            Agregar nuevo usuario
+            <a href="{{ url('empresa/registrar') }}" id="button-login-register" class="btn" style="width:16%;color:white">
+            Agregar nueva empresa
             </a>
         </div>
-        <div>
+                <div>
 
             <table class="table">
                 <thead>
@@ -28,17 +28,18 @@
                         <th>Nombre</th>
                         <th>Correo electrónico</th>
                         <th>Teléfono</th>
-                        <th>Profesión</th>
+                        <th>Dirección</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($usuarios as $usuario)
+                    @foreach ($empresas as $empresa)
                         <tr>
-                            <td>{{ $usuario->id }}</td>
-                            <td>{{ $usuario->name }}</td>
-                            <td>{{ $usuario->email }}</td>
-                            <td>{{ $usuario->phone }}</td>
-                            <td>{{ $usuario->profesion }}</td>
+                            <td>{{ $empresa->id }}</td>
+                            <td>{{ $empresa->nombre }}</td>
+                            <td>{{ $empresa->correo }}</td>
+                            <td>{{ $empresa->telefono }}</td>
+                            <td>{{ $empresa->direccion }}</td>
                         </tr>
                     @endforeach
                 </tbody>

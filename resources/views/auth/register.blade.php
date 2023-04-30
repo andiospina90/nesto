@@ -1,6 +1,6 @@
 @extends('layout')
 
-@section('content')
+@section('contentLogin')
     <div id="login-register-container">
         <div>
             <img src="{{ asset('img/Nesto blanco.svg') }}" alt="logo" id="back-logo-container">

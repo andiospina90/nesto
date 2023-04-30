@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
-class UserController extends Controller
+class EmpresaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
-        return view("usuario.index",compact("usuarios"));
+        $empresas = Empresa::all();
+        return view("empresa.index",compact("empresas"));
     }
 
     /**
@@ -27,7 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view("usuario.registrar");
+        return view("empresa.registrar");
     }
 
     /**
@@ -38,30 +37,32 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       
         $validator = Validator::make($request->all(), [
             'nombre' => 'required',
-            'apellidos' => 'required',
+            'nit' => '',
+            'direccion' => '',
+            'telefono' => '',
             'correo' => 'required|email',
-            'rol' => 'required',
-            'telefono' => 'required',
-            'profesion' => 'required'
+            'estado' => 'required',
         ]);
-    
+
         if ($validator->fails()) {
-            return redirect('/usuario/registrar')
+            return redirect('/empresa/registrar')
                         ->withErrors($validator)
                         ->withInput();
         }
 
-        User::create([
-            'name' => $request->nombre,
-            'last_name' => $request->apellidos,
-            'email' => $request->correo,
-            'phone' => $request->telefono,
-            'profesion' => $request->profesion,
-            'password' => bcrypt(substr(str_replace(['+', '/', '='], '', Str::random(40)), 0, 10))
+        Empresa::create([
+            'nombre' => $request->nombre,
+            'nit' => $request->nit,
+            'direccion' => $request->direccion,
+            'telefono' => $request->telefono,
+            'correo' => $request->correo,
+            'estado' => $request->estado,
         ]);
+
+        return redirect('/empresas')->with('success', 'Empresa registrada correctamente');
+       
     }
 
     /**

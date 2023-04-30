@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginRegisterController;
-use App\Http\Controllers\BaseController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +48,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
+
+    
     Route::get('/usuarios',[UserController::class,'index']);
     Route::get('/usuario/registrar',[UserController::class,'create']);
+    Route::post('/usuario/registrar',[UserController::class,'store']);
+
+    //rutas empresa 
+    Route::get('/empresas',[EmpresaController::class,'index']);
+    Route::get('/empresa/registrar',[EmpresaController::class,'create']);
+    Route::post('/empresa/registrar',[EmpresaController::class,'store']);
 
 });
