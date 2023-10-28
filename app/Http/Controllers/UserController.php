@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $usuarios = User::all();
-        return view("usuario.index",compact("usuarios"));
+        return view("usuario.index", compact("usuarios"));
     }
 
     /**
@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $validator = Validator::make($request->all(), [
             'nombre' => 'required',
             'apellidos' => 'required',
@@ -47,11 +47,11 @@ class UserController extends Controller
             'telefono' => 'required',
             'profesion' => 'required'
         ]);
-    
+
         if ($validator->fails()) {
             return redirect('/usuario/registrar')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
 
         User::create([
@@ -62,6 +62,8 @@ class UserController extends Controller
             'profesion' => $request->profesion,
             'password' => bcrypt(substr(str_replace(['+', '/', '='], '', Str::random(40)), 0, 10))
         ]);
+
+        return redirect('usuarios')->with('success', 'Usuario agregado exitosamente.');
     }
 
     /**
@@ -81,9 +83,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $usuario)
     {
-        //
+        return view('usuario.editar', compact('usuario'));
     }
 
     /**
@@ -93,9 +95,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $usuario)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellidos' => 'required|string|max:255',
+            'correo' => 'required|email',
+            'telefono' => 'required|string|max:20',
+            'profesion' => 'required|string|max:255',
+            'rol' => 'required|in:administrador,usuario',
+        ]);
+
+        $usuario->update([
+            'name' => $request->nombre,
+            'last_name' => $request->apellidos,
+            'email' => $request->correo,
+            'phone' => $request->telefono,
+            'profesion' => $request->profesion,
+            'role' => $request->rol,
+        ]);
+
+        return redirect('usuarios')->with('success', 'Usuario actualizado exitosamente.');
     }
 
     /**
@@ -104,8 +124,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $usuario)
     {
-        //
+        $usuario->delete();
+
+        return redirect('usuarios')->with('success', 'Usuario eliminado exitosamente.');
     }
 }

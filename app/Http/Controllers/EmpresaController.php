@@ -73,18 +73,19 @@ class EmpresaController extends Controller
      */
     public function show($id)
     {
-        //
+        $empresas = Empresa::find();
+        return view("empresa.index",compact("empresas"));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  model  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Empresa $empresa)
     {
-        //
+        return view('empresa.editar', compact('empresa'));
     }
 
     /**
@@ -94,9 +95,21 @@ class EmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Empresa $empresa)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'nit' => 'required',
+            'direccion' => 'required',
+            'telefono' => 'required',
+            'correo' => 'required',
+            'estado' => 'required',
+        ]);
+
+        $empresa->update($request->all());
+
+        return redirect()->route('empresas')->with('success', 'Empresa actualizada exitosamente.');
+
     }
 
     /**
@@ -105,8 +118,12 @@ class EmpresaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Empresa $empresa)
     {
-        //
+        // Lógica para eliminar la empresa
+        $empresa->delete();
+    
+        return redirect('empresas')
+            ->with('success', 'Empresa eliminada exitosamente.');
     }
 }

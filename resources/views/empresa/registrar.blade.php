@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <div class="">
+    <div class="container">
         <h1 class="titulos">Registrar Empresa</h1>
         <form class="row g-3 flex-column flex-md-row" method="post" action="{{ url('empresa/registrar') }}">
             @csrf
@@ -53,10 +53,17 @@
                     </div>
                 @endif
             </div>
-            <div class="col-12">
-                <button type="submit" id="button-login-register" class="btn">
-                    <span id="login-register-button-text">Guardar</span>
-                </button></button>
+            <div class="col-12 d-flex justify-content-between">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" id="button-login-register" class="btn">
+                            <span id="login-register-button-text">Guardar</span>
+                        </button>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{ url('empresas') }}" class="btn btn-secondary" id="button-login-register" style="justify-content:center">Volver</a>
+                    </div>
+                </div>
             </div>
         </form>
     </div>

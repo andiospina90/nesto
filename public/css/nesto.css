@@ -37,7 +37,7 @@
     top: 0;
     left: 0;
     height: 100vh;
-    width: 260px;
+    width: 13rem;
     background-color: #202020;
     z-index: 100;
     transition: all 0.5s ease;
@@ -258,7 +258,7 @@
     position: relative;
     height: 100%;
     width: 100vw;
-    left: 260px;
+    left: 13rem;
     background-color: #e4e9f7;
     transition: all 0.5s ease;
 }
