@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Empresa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -43,7 +44,18 @@ class LoginRegisterController extends Controller
             'telefono' => 'required',
             'apellidos' => 'required',
             'password' => 'required',
+            'empresa' => 'required',
         ]);
+
+       $empresa =  Empresa::create([
+            'nombre' => $request->empresa,
+            'nit' => '',
+            'direccion' => '',
+            'telefono' => '',
+            'correo' => '',
+            'estado' => 1,
+        ]);
+
 
         User::create([
             'name' => $request->nombre,
@@ -51,7 +63,10 @@ class LoginRegisterController extends Controller
             'email' => $request->email,
             'phone' => $request->telefono,
             'password' => Hash::make($request->password),
+            'id_empresa' => $empresa->id
         ]);
+
+
 
         return redirect()->route('login');
     }

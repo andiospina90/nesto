@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <div class="">
+    <div class="div-pagina">
         <h1 class="titulos">Consultar Proyectos</h1>
 
         <div>
@@ -19,8 +19,8 @@
                 Agregar proyecto
             </a>
         </div>
-        <div>
-            <table class="table">
+        <div class="">
+            <table class="table table-responsive">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -29,7 +29,8 @@
                         <th>Fecha de Inicio</th>
                         <th>Fecha de Fin</th>
                         <th>Estado</th>
-                        <th>Seguimiento</th>
+                        <th>Porcentaje Cumplido</th>
+                        <th>Tareas</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
@@ -44,27 +45,29 @@
                             <td>{{ $proyecto->fecha_fin }}</td>
                             <td>
                                 @if ($proyecto->estado == 1)
-                                    Completado
+                                    <span class="badge bg-success">Completado</span>
                                 @elseif ($proyecto->estado == 2)
-                                    En Progreso
+                                    <span class="badge bg-warning text-dark">En Progreso</span>
                                 @else
-                                    Pendiente
+                                    <span class="badge bg-danger">Pendiente</span>
                                 @endif
                             </td>
+                            <td>{{ $proyecto->porcentaje }}%</td>
                             <td><a href="{{ url("/proyecto/{$proyecto->id}/seguimiento") }}" class="btn btn-secondary"
-                                    id="button-login-register" style="justify-content:center; "><i class="fa-regular fa-eye"></i>Seguimiento</a>
+                                    id="button-login-register" style="justify-content:center;"><i
+                                        class="fa-regular fa-eye"></i>Seguimiento</a>
                             <td><a href="{{ url("/proyecto/{$proyecto->id}/editar") }}" class="btn btn-secondary"
-                                    id="button-login-register" style="justify-content:center; "><i class="fa-regular fa-pen-to-square"></i>Editar</a>
+                                    id="button-login-register" style="justify-content:center; "><i
+                                        class="fa-regular fa-pen-to-square"></i>Editar</a>
                             </td>
                             <td>
-                                <form action="{{ url("/proyecto/{$proyecto->id}") }}" method="POST"
-                                    style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-secondary" id="button-login-register"
-                                        style="justify-content:center; "><i class="fa-solid fa-trash"></i>Eliminar</button>
-                                </form>
+                                <button type="button" class="btn btn-secondary"
+                                    id="button-login-register" style="justify-content:center;" data-bs-toggle="modal"
+                                    data-bs-target="#confirmModal{{ $proyecto->id }}">
+                                    Eliminar
+                                </button>
                             </td>
+                            @include('proyecto.eliminar')
                         </tr>
                     @endforeach
                 </tbody>

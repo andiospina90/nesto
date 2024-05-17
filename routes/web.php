@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginRegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\TareaController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,7 +72,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/proyecto/registrar', [ProyectoController::class, 'store']);
     Route::get('/proyecto/{proyecto}/editar', [ProyectoController::class, 'edit']);
     Route::put('/proyecto/{proyecto}', [ProyectoController::class, 'update']);
-    Route::delete('/proyecto/{proyecto}', [ProyectoController::class, 'destroy']);
+    Route::delete('/proyecto/{proyecto}', [ProyectoController::class, 'destroy'])->name('proyecto.destroy');
     Route::get('/proyecto/{proyecto}/seguimiento', [ProyectoController::class, 'show']);
 
+    Route::post('/tareas', [TareaController::class, 'store'])->name('tareas.store');
+    Route::get('/tarea/{id}/editar', [TareaController::class, 'edit'])->name('tareas.update');
+    Route::put('/tarea/{id}', [TareaController::class, 'update']);
+    Route::delete('/tarea/{id}', [TareaController::class, 'destroy'])->name('tareas.destroy');
+
+
+    Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');
 });

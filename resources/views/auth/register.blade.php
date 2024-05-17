@@ -38,6 +38,15 @@
                                 </div>
                                 <div class="" id="fomr-input-container">
                                     {{-- <label for="email" class="form-label">Correo electrónico</label> --}}
+                                    <input type="empresa" class="form-control @error('empresa') is-invalid @enderror"
+                                        id="empresa" name="empresa" value="{{ old('empresa') }}" required
+                                        placeholder="Empresa o Independiente">
+                                    @error('empresa')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="" id="fomr-input-container">
+                                    {{-- <label for="email" class="form-label">Correo electrónico</label> --}}
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                                         id="email" name="email" value="{{ old('email') }}" required
                                         placeholder="Correo electrónico">
@@ -65,7 +74,8 @@
                                 <div class="mb-3 mt-3 d-flex justify-content-center" style="padding-top: 20px;">
                                     <button type="submit" class="btn" id="button-login-register">
                                         <span id="login-register-button-text">Registrarse</span></button>
-                                    <a href="{{ route('login') }}" class="btn" id="button-login-register" style="margin-left:10px;">
+                                    <a href="{{ route('login') }}" class="btn" id="button-login-register"
+                                        style="margin-left:10px;">
                                         <span id="login-register-button-text">Regresar</span>
                                     </a>
                                 </div>

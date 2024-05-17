@@ -16,5 +16,16 @@ class Proyecto extends Model
         'fecha_fin',
         'estado',
         'presupuesto',
+        'id_empresa',
     ];
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class, 'id_empresa');
+    }
+
+    public function tareas()
+    {
+        return $this->hasMany(Tarea::class, 'id_proyecto');
+    }
 }

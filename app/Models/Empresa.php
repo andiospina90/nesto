@@ -17,4 +17,9 @@ class Empresa extends Model
         'correo',
         'estado'
     ];
+
+    public function proyectos()
+    {
+        return $this->hasMany(Proyecto::class, 'id_empresa');
+    }
 }

@@ -38,11 +38,6 @@
                     <img src="{{ asset('img/NestoWhite.svg') }}" alt="logo" width="100">
                     <div class="logo-text-container"><span class="logo-text">N</span></div>
                 </div>
-
-                <div style="font-size:20px; padding-top: 18%;">
-                    <i class="fa-solid fa-circle-user"></i>
-                    <span style="color:white">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
-                </div>
             </div>
             <ul class="nav-list">
                 <li>
@@ -74,16 +69,30 @@
                         <span class="link-name" style="font-size:15px">Proyectos</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fa-solid fa-sign-out-alt"></i>
+                        <span class="link-name" style="font-size:15px">Cerrar Sesión</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="home-section">
-            <div class="home-content">
-                <i class="fas fa-bars"></i>
+
+            <div class="home-content" style="padding-top: 5px; display: flex; justify-content: space-between">
+                <i class="fas fa-bars"></i> <div style="font-size:20px; margin-right: 20px">
+                    <i class="fa-solid fa-circle-user" style="margin-right:5px"></i>
+                    <span style="color:black">{{ Auth::user()->name }}</span>
+                </div>
             </div>
+
             <div class="content-container">
                 @yield('content')
             </div>
         </div>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     @else
         @yield('contentLogin')
     @endif
