@@ -31,9 +31,9 @@
             <div class="col-md-6">
                 <label for="fecha_inicio" class="form-label col-auto">Prioridad</label>
                 <select class="form-select" id="prioridad" name="prioridad" required>
-                    <option value="1" {{ $tarea->prioridad === '1' ? 'selected' : '' }}>Baja</option>
-                    <option value="2" {{ $tarea->prioridad === '2' ? 'selected' : '' }}>Media</option>
-                    <option value="3" {{ $tarea->prioridad === '3' ? 'selected' : '' }}>Alta</option>
+                    <option value="1" {{ $tarea->prioridad == '1' ? 'selected' : '' }}>Baja</option>
+                    <option value="2" {{ $tarea->prioridad == '2' ? 'selected' : '' }}>Media</option>
+                    <option value="3" {{ $tarea->prioridad == '3' ? 'selected' : '' }}>Alta</option>
                 </select>
                 @if ($errors->has('prioridad'))
                     <div class="invalid-feedback">
@@ -62,9 +62,9 @@
             <div class="col-md-6">
                 <label for="estado" class="form-label col-auto">Estado</label>
                 <select class="form-select @error('estado') is-invalid @enderror" id="estado" name="estado">
-                    <option value="0" {{ $tarea->estado === '0' ? 'selected' : '' }}>Pendiente</option>
-                    <option value="1" {{ $tarea->estado === '1' ? 'selected' : '' }}>Activa</option>
-                    <option value="2" {{ $tarea->estado === '2' ? 'selected' : '' }}>Terminada</option>
+                    <option value="0" {{ $tarea->estado == '0' ? 'selected' : '' }}>Pendiente</option>
+                    <option value="1" {{ $tarea->estado == '1' ? 'selected' : '' }}>Activa</option>
+                    <option value="2" {{ $tarea->estado == '2' ? 'selected' : '' }}>Terminada</option>
                 </select>
                 @if ($errors->has('estado'))
                     <div class="invalid-feedback">

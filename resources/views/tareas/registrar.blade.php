@@ -23,8 +23,8 @@
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
                     </div>
                     <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+                        <label for="descripcion" class="form-label">Comentarios</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>http://localhost/nesto/public/empresas
                     </div>
                     <div class="mb-3">
                         <label for="prioridad" class="form-label">Prioridad</label>
@@ -45,7 +45,7 @@
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="prioridad" class="form-label">Estado</label>
+                        <label for="estado" class="form-label">Estado</label>
                         <select class="form-select" id="estado" name="estado" required>
                             <option value="0" selected>Pendiente</option>
                             <option value="1" >Activa</option>

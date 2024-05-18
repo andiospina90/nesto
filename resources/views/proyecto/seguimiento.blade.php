@@ -56,32 +56,37 @@
                             <td>{{ $tarea->nombre }}</td>
                             <td>{{ $tarea->descripcion }}</td>
                             <td>{{ $tarea->usuario->name . ' ' . $tarea->usuario->last_name }}</td>
+                            <td>{{ $tarea->estado }}</td>
                             <td>
                                 @if ($tarea->estado == 2)
                                     <span class="badge bg-success">Completado</span>
                                 @elseif ($tarea->estado == 1)
                                     <span class="badge bg-warning text-dark">En Progreso</span>
-                                @else
+                                @elseif ($tarea->estado == 0)
                                     <span class="badge bg-danger">Pendiente</span>
                                 @endif
                             </td>
                             <td>
                                 @if ($tarea->prioridad == 2)
                                     <span class="badge bg-success">Media</span>
-                                @elseif ($tarea->estado == 1)
+                                @elseif ($tarea->prioridad == 1)
                                     <span class="badge bg-warning text-dark">Baja</span>
-                                @else
+                                @elseif ($tarea->prioridad == 3)
                                     <span class="badge bg-danger">Alta</span>
                                 @endif
                             </td>
                             <td>{{ $tarea->updated_at }}</td>
                             <td><a href="{{ url("/tarea/{$tarea->id}/editar") }}" class="btn btn-secondary"
                                     id="button-login-register" style="justify-content:center;">Editar</a></td>
-                            <td><button type="button" class="btn btn-secondary"
-                                    id="button-login-register" style="justify-content:center;" data-bs-toggle="modal"
+                            @if (Auth::user()->id_rol == 1)
+                            <td>
+                                <button type="button" class="btn btn-secondary" id="button-login-register"
+                                    style="justify-content:center;" data-bs-toggle="modal"
                                     data-bs-target="#confirmModal{{ $tarea->id }}">
                                     Eliminar
-                                </button></td>
+                                </button>
+                            </td>
+                            @endif
                         </tr>
                         @include('tareas.eliminar')
                     @endforeach

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -16,7 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
+
+        $usuarios = User::where('id_empresa', Auth::user()->id_empresa)->get();
         return view("usuario.index", compact("usuarios"));
     }
 
@@ -38,14 +41,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-
+       
         $validator = Validator::make($request->all(), [
             'nombre' => 'required',
             'apellidos' => 'required',
             'correo' => 'required|email',
             'rol' => 'required',
             'telefono' => 'required',
-            'profesion' => 'required'
+            'profesion' => 'required',
+            'id_rol' => '',
         ]);
 
         if ($validator->fails()) {
@@ -60,7 +64,9 @@ class UserController extends Controller
             'email' => $request->correo,
             'phone' => $request->telefono,
             'profesion' => $request->profesion,
-            'password' => bcrypt(substr(str_replace(['+', '/', '='], '', Str::random(40)), 0, 10))
+            'password' => Hash::make('123456789'),
+            'id_rol' => $request->id_rol == null ? 2 : $request->id_rol,
+            'id_empresa' => Auth::user()->id_empresa,
         ]);
 
         return redirect('usuarios')->with('success', 'Usuario agregado exitosamente.');
@@ -97,14 +103,21 @@ class UserController extends Controller
      */
     public function update(Request $request, User $usuario)
     {
+        
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'correo' => 'required|email',
             'telefono' => 'required|string|max:20',
             'profesion' => 'required|string|max:255',
-            'rol' => 'required|in:administrador,usuario',
+            'id_rol' => 'required|in:1,2',
         ]);
+
+        $verificarUsuariosAdmin = User::where('id_empresa', Auth::user()->id_empresa)->where('id_rol', 1)->count();
+
+        if ($verificarUsuariosAdmin == 1 && $request->id_rol != 1 && $request->id_rol != null) {
+            return redirect('/usuarios')->with('error', 'No puede eliminar el único administrador.');
+        }
 
         $usuario->update([
             'name' => $request->nombre,
@@ -112,7 +125,7 @@ class UserController extends Controller
             'email' => $request->correo,
             'phone' => $request->telefono,
             'profesion' => $request->profesion,
-            'role' => $request->rol,
+            'id_rol' => $request->id_rol,
         ]);
 
         return redirect('usuarios')->with('success', 'Usuario actualizado exitosamente.');

@@ -15,7 +15,8 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        $empresas = Empresa::all();
+        
+        $empresas = Empresa::where('id',Auth()->user()->id_empresa)->get();
         return view("empresa.index",compact("empresas"));
     }
 

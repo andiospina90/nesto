@@ -63,7 +63,8 @@ class LoginRegisterController extends Controller
             'email' => $request->email,
             'phone' => $request->telefono,
             'password' => Hash::make($request->password),
-            'id_empresa' => $empresa->id
+            'id_empresa' => $empresa->id,
+            'id_rol' => 1
         ]);
 
 
@@ -92,7 +93,7 @@ class LoginRegisterController extends Controller
     public function main()
     {
         $user = auth()->user();
-        return view('main', compact('user'));
+        return redirect('proyectos');
     }
 
     public function logout(Request $request)

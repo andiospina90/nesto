@@ -14,10 +14,12 @@
             @endif
         </div>
         <div style="margin-top: 4rem; margin-bottom: 4rem;">
+            @if (Auth::user()->id_rol == 1)
             <a href="{{ url('proyecto/registrar') }}" id="button-login-register" class="btn"
                 style="width: 15%; color: white;justify-content:center">
                 Agregar proyecto
             </a>
+            @endif
         </div>
         <div class="">
             <table class="table table-responsive">
@@ -31,8 +33,10 @@
                         <th>Estado</th>
                         <th>Porcentaje Cumplido</th>
                         <th>Tareas</th>
+                        @if (Auth::user()->id_rol == 1)
                         <th>Editar</th>
                         <th>Eliminar</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -56,6 +60,8 @@
                             <td><a href="{{ url("/proyecto/{$proyecto->id}/seguimiento") }}" class="btn btn-secondary"
                                     id="button-login-register" style="justify-content:center;"><i
                                         class="fa-regular fa-eye"></i>Seguimiento</a>
+                            </td>
+                            @if (Auth::user()->id_rol == 1)
                             <td><a href="{{ url("/proyecto/{$proyecto->id}/editar") }}" class="btn btn-secondary"
                                     id="button-login-register" style="justify-content:center; "><i
                                         class="fa-regular fa-pen-to-square"></i>Editar</a>
@@ -68,6 +74,7 @@
                                 </button>
                             </td>
                             @include('proyecto.eliminar')
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

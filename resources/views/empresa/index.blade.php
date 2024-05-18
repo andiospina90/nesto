@@ -15,9 +15,6 @@
             @endif
         </div>
         <div style="margin-top:4rem;margin-bottom:4rem">
-            <a href="{{ url('empresa/registrar') }}" id="button-login-register" class="btn" style="width:16%;color:white;justify-content:center">
-                Agregar nueva empresa
-            </a>
         </div>
         <div>
 
@@ -30,8 +27,9 @@
                         <th>Teléfono</th>
                         <th>Dirección</th>
                         <th>Estado</th>
-                        <th>Editar</th>
-                        <th>Eliminar</th>
+                        @if (Auth::user()->id_rol == 1)
+                            <th>Editar</th>
+                        @endif
                     </tr>
                 </thead>
                 <tbody>
@@ -44,22 +42,27 @@
                             <td>{{ $empresa->direccion }}</td>
                             <td>
                                 @if ($empresa->estado == 1)
-                                    Activo
+                                    <span class="badge bg-success">Activo</span>
                                 @else
-                                    Inactivo
+                                    <span class="badge bg-danger">Inactivo</span>
                                 @endif
                             </td>
-                            <td><a href="{{ url("/empresa/{$empresa->id}/editar") }}"  class="btn btn-secondary"
-                                    id="button-login-register" style="justify-content:center; "><i class="fa-regular fa-pen-to-square"></i>Editar</a>
-                            </td>
-                            <td>
-                                <form action="{{ url("/empresa/{$empresa->id}") }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"  class="btn btn-secondary" id="button-login-register"
-                                        style="justify-content:center; "><i class="fa-solid fa-trash"></i>Eliminar</button>
-                                </form>
-                            </td>
+                            @if (Auth::user()->id_rol == 1)
+                                <td><a href="{{ url("/empresa/{$empresa->id}/editar") }}" class="btn btn-secondary"
+                                        id="button-login-register" style="justify-content:center; "><i
+                                            class="fa-regular fa-pen-to-square"></i>Editar</a>
+                                </td>
+                                {{-- <td>
+                                    <form action="{{ url("/empresa/{$empresa->id}") }}" method="POST"
+                                        style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-secondary" id="button-login-register"
+                                            style="justify-content:center; "><i
+                                                class="fa-solid fa-trash"></i>Eliminar</button>
+                                    </form>
+                                </td> --}}
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>

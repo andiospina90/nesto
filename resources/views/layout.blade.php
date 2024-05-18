@@ -41,16 +41,16 @@
             </div>
             <ul class="nav-list">
                 <li>
-                    <a href="{{ url('/dashboard') }}">
-                        <i class="fab fa-microsoft"></i>
-                        <span class="link-name" style="font-size:15px">Dashboard</span>
+                    <a href="{{ url('/proyectos') }}">
+                        <i class="fa-solid fa-chalkboard"></i>
+                        <span class="link-name" style="font-size:15px">Proyectos</span>
                     </a>
                 </li>
                 <li>
                     <div class="icon-link">
                         <a href="{{ url('/usuarios') }}">
                             <i class="fa-solid fa-user"></i>
-                            <span class="link-name" style="font-size:15px">Usuarios</span>
+                            <span class="link-name" style="font-size:15px">Colaboradores</span>
                         </a>
                     </div>
                 </li>
@@ -62,12 +62,6 @@
                         </a>
                     </div>
 
-                </li>
-                <li>
-                    <a href="{{ url('/proyectos') }}">
-                        <i class="fa-solid fa-chalkboard"></i>
-                        <span class="link-name" style="font-size:15px">Proyectos</span>
-                    </a>
                 </li>
                 <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

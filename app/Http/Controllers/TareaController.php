@@ -129,6 +129,7 @@ class TareaController extends Controller
 
         $tarea = Tarea::find($id);
 
+
         $tarea->update([
             'nombre' => $request->nombre,
             'prioridad' => $request->prioridad,

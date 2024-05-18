@@ -59,9 +59,9 @@
             <div class="col-md-6">
                 <label for="rol" class="form-label col-auto">Rol</label>
                 <select class="form-select  @error('rol') is-invalid @enderror" id="rol" name="rol">
-                    <option selected disabled>Selecciona un estado</option>
-                    <option value="administrador">Administrador</option>
-                    <option value="usuario">Usuario</option>
+                    <option disabled>Selecciona un estado</option>
+                    <option value="1">Administrador</option>
+                    <option value="2" selected>Usuario</option>
                 </select>
                 @if ($errors->has('rol'))
                     <div class="invalid-feedback">
