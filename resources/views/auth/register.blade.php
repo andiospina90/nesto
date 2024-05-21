@@ -40,7 +40,7 @@
                                     {{-- <label for="email" class="form-label">Correo electrónico</label> --}}
                                     <input type="empresa" class="form-control @error('empresa') is-invalid @enderror"
                                         id="empresa" name="empresa" value="{{ old('empresa') }}" required
-                                        placeholder="Empresa o Independiente">
+                                        placeholder="Nombre empresa o Independiente">
                                     @error('empresa')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
