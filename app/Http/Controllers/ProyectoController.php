@@ -111,7 +111,7 @@ class ProyectoController extends Controller
             ->select('id', 'name', 'last_name')
             ->get();
 
-        $tareas = Tarea::where('id_proyecto', $proyecto->id)->with('usuario')->get();
+            $tareas = Tarea::where('id_proyecto', $proyecto->id)->with('usuario', 'comentarios')->get();
 
         return view('proyecto.seguimiento', compact('proyecto', 'colaboradores', 'tareas'));
     }

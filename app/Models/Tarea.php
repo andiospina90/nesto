@@ -28,4 +28,9 @@ class Tarea extends Model
     {
         return $this->belongsTo(User::class, 'id_usuario');
     }
+
+    public function comentarios()
+    {
+        return $this->hasMany(ComentarioSeguimiento::class, 'id_tarea');
+    }
 }

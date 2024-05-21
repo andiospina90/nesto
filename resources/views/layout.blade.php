@@ -42,6 +42,14 @@
             <ul class="nav-list">
                 <li>
                     <a href="{{ url('/proyectos') }}">
+                        <a href="{{ url('/dashboard') }}">
+                        <i class="fab fa-microsoft"></i>
+                        <span class="link-name" style="font-size:15px">Dashboard</span>
+                    </a>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url('/proyectos') }}">
                         <i class="fa-solid fa-chalkboard"></i>
                         <span class="link-name" style="font-size:15px">Proyectos</span>
                     </a>
@@ -64,7 +72,8 @@
 
                 </li>
                 <li>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="fa-solid fa-sign-out-alt"></i>
                         <span class="link-name" style="font-size:15px">Cerrar Sesión</span>
                     </a>
@@ -74,7 +83,8 @@
         <div class="home-section">
 
             <div class="home-content" style="padding-top: 5px; display: flex; justify-content: space-between">
-                <i class="fas fa-bars"></i> <div style="font-size:20px; margin-right: 20px">
+                <i class="fas fa-bars"></i>
+                <div style="font-size:20px; margin-right: 20px">
                     <i class="fa-solid fa-circle-user" style="margin-right:5px"></i>
                     <span style="color:black">{{ Auth::user()->name }}</span>
                 </div>

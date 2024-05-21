@@ -19,7 +19,7 @@
             </div>
 
             <div class="col-md-6">
-                <label for="descripcion" class="form-label col-auto">Descripción</label>
+                <label for="descripcion" class="form-label col-auto">Insertar Comentario</label>
                 <textarea class="form-control @error('descripcion') is-invalid @enderror" id="descripcion" name="descripcion">{{ $tarea->descripcion }}</textarea>
                 @if ($errors->has('descripcion'))
                     <div class="invalid-feedback">

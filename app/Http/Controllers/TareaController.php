@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ComentarioSeguimiento;
 use App\Models\Proyecto;
 use App\Models\Tarea;
 use App\Models\User;
@@ -124,6 +125,7 @@ class TareaController extends Controller
             'prioridad' => 'required|in:1,2,3',
             'id_colaborador' => 'required|exists:users,id',
             'estado' => 'required|in:0,1,2',
+            'descripcion' => 'nullable|string|max:1000',
         
         ]);
 
@@ -135,6 +137,11 @@ class TareaController extends Controller
             'prioridad' => $request->prioridad,
             'id_usuario' => $request->id_colaborador,
             'estado' => $request->estado,
+        ]);
+
+        ComentarioSeguimiento::create([
+            'id_tarea' => $tarea->id,
+            'comentario' => $request->descripcion,
         ]);
             
         return redirect("proyecto/" . $tarea->id_proyecto . "/seguimiento")->with('success', 'Tarea Editada exitosamente');
@@ -151,5 +158,23 @@ class TareaController extends Controller
         $tarea = Tarea::find($id);
         $tarea->delete();
         return redirect("proyecto/" . $tarea->id_proyecto . "/seguimiento")->with('success', 'Tarea eliminada exitosamente');
+    }
+
+    public function storeComment(Request $request)
+    {
+        
+        $request->validate([
+            'comentario' => 'required|string|max:1000',
+            'id_tarea' => 'required|exists:tareas,id',
+            'id_proyecto' => 'required'
+        ]);
+
+        $comentarios = ComentarioSeguimiento::create([
+            'id_tarea' => $request->id_tarea,
+            'comentario' => $request->comentario,
+        ]);
+
+
+        return redirect("proyecto/" . $request->id_proyecto . "/seguimiento")->with('success', 'Comentario creado exitosamente');
     }
 }

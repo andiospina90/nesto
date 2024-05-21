@@ -79,6 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tarea/{id}/editar', [TareaController::class, 'edit'])->name('tareas.update');
     Route::put('/tarea/{id}', [TareaController::class, 'update']);
     Route::delete('/tarea/{id}', [TareaController::class, 'destroy'])->name('tareas.destroy');
+    Route::post('tarea/comentario', [TareaController::class, 'storeComment'])->name('comentario.guardar');
 
 
     Route::post('/logout', [LoginRegisterController::class, 'logout'])->name('logout');

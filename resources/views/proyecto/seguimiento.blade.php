@@ -46,6 +46,7 @@
                         <th>Prioridad</th>
                         <th>Ultima actualización</th>
                         <th>Editar</th>
+                        <th>Comentarios</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
@@ -56,7 +57,6 @@
                             <td>{{ $tarea->nombre }}</td>
                             <td>{{ $tarea->descripcion }}</td>
                             <td>{{ $tarea->usuario->name . ' ' . $tarea->usuario->last_name }}</td>
-                            <td>{{ $tarea->estado }}</td>
                             <td>
                                 @if ($tarea->estado == 2)
                                     <span class="badge bg-success">Completado</span>
@@ -77,15 +77,22 @@
                             </td>
                             <td>{{ $tarea->updated_at }}</td>
                             <td><a href="{{ url("/tarea/{$tarea->id}/editar") }}" class="btn btn-secondary"
-                                    id="button-login-register" style="justify-content:center;">Editar</a></td>
-                            @if (Auth::user()->id_rol == 1)
-                            <td>
-                                <button type="button" class="btn btn-secondary" id="button-login-register"
-                                    style="justify-content:center;" data-bs-toggle="modal"
-                                    data-bs-target="#confirmModal{{ $tarea->id }}">
-                                    Eliminar
-                                </button>
+                                    id="button-login-register" style="justify-content:center;">Editar</a>
                             </td>
+                            <td>
+                                    <button type="button" data-bs-toggle="modal" class="btn btn-secondary"
+                                        id="button-login-register" data-bs-target="#comentariosModal{{ $tarea->id }}">
+                                        Ver Comentarios
+                                    </button>
+                            </td>
+                            @if (Auth::user()->id_rol == 1)
+                                <td>
+                                    <button type="button" class="btn btn-secondary" id="button-login-register"
+                                        style="justify-content:center;" data-bs-toggle="modal"
+                                        data-bs-target="#confirmModal{{ $tarea->id }}">
+                                        Eliminar
+                                    </button>
+                                </td>
                             @endif
                         </tr>
                         @include('tareas.eliminar')
@@ -137,3 +144,35 @@
     @include('tareas.registrar')
     </div>
 @endsection
+
+@foreach ($tareas as $tarea)
+    <div class="modal fade" id="comentariosModal{{ $tarea->id }}" tabindex="-1"
+        aria-labelledby="comentariosModalLabel{{ $tarea->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="comentariosModalLabel{{ $tarea->id }}">Comentarios de la Tarea
+                        {{ $tarea->id }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        @foreach ($tarea->comentarios as $comentario)
+                            <li class="list-group-item">{{ $comentario->comentario }}</li>
+                        @endforeach
+                    </ul>
+                    <form action="{{ route('comentario.guardar') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id_tarea" value="{{ $tarea->id }}">
+                        <input type="hidden" name="id_proyecto" value="{{ $tarea->id_proyecto }}">
+                        <textarea class="form-control mt-3" name="comentario" placeholder="Escribe un comentario"></textarea>
+                        <button type="submit" class="btn btn-secondary mt-3" id="button-login-register" style="justify-content:center">Guardar Comentario</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" class="btn btn-secondary" id="button-login-register" style="justify-content:center">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
