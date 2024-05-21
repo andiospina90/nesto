@@ -57,7 +57,7 @@ class DashboardController extends Controller
     private function mostrarTareasActivas()
     {
 
-        return Tarea::where('estado', 2)
+        return Tarea::where('estado', 1)
             ->with('proyecto')
             ->with('usuario')
             ->with('comentarios')
